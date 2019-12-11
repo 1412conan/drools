@@ -1,0 +1,19 @@
+package rules;
+import com.curefun.drools.entity.Message
+dialect  "mvel"
+
+rule "Hello World"
+    when
+        $s : Message(status == Message.HELLO,message : message)
+    then
+       System.out.println( message);
+     modify ($s) { message = "Goodbye hello world",status = Message.GOODBYE }
+end
+
+rule "Good bye"
+    when
+        Message( status == Message.GOODBYE, message : message )
+    then
+        System.out.println( message );
+    end
+
